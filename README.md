@@ -14,8 +14,18 @@ npm run dev
 # build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+最后打开浏览器，输入`localhost:8880`即可访问。效果图如下：
+
+![text](./static/doubanmovie.gif)
+## third part
+
+> axios 请求
+
+> font-awesome 图标
+
+> ress 重置样式
+
+> vue-infinite-scroll 下拉加载
+

@@ -47,16 +47,17 @@
                 return this.movie.countries.join(' / ') + ' / '+this.movie.genres.join(' / ') + ' / '+this.movie.directors[0].name +'(导演) / ' + cast;
             },
             textType(){
-                //console.log(this.$route.params.textType)
-                return this.$route.params.textType;
+                //console.log(this.$route.query.textType)
+                return this.$route.query.textType;
             },
             pageType(){
-                //console.log(this.$route.params.pageType)
-                return this.$route.params.pageType;
+                //console.log(this.$route.query.pageType)
+                return this.$route.query.pageType;
             }
         },
         created(){
-            axios.get('/api/movie/subject/'+this.$route.params.id)
+            console.log(this.$route.query.id)
+            axios.get('/api/movie/subject/'+this.$route.query.id)
                 .then((response) => {
                     console.log('111')
                     this.movie=response.data
