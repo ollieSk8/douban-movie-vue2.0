@@ -18,6 +18,7 @@ const moviedetail= resolve => {
 Vue.use(Router)
 ///moviedetail/:id
 export default new Router({
+    mode: 'history',
     routes: [
     {
       path: '/',

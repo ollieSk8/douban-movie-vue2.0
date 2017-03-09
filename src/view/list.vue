@@ -4,7 +4,7 @@
         <div class="movie-list" v-infinite-scroll="fetchData" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
             <ul>
                 <li v-for="moive in moives">
-                    <router-link :to="{ name: 'moviedetail', params: { id : moive.id,textType:moive.title}}">
+                    <router-link :to="{ name: 'moviedetail', query: { id : moive.id,textType:moive.title}}">
                         <div class="cover"><img v-bind:src="moive.images.medium" alt=""></div>
                         <div class="info"><h3>{{moive.title}}</h3></div>
                     </router-link>
@@ -32,12 +32,12 @@
         },
         computed:{
             textType(){
-                //console.log(this.$route.params.textType)
-                return this.$route.params.textType;
+                //console.log(this.$route.query.textType
+                return this.$route.query.textType;
             },
             pageType(){
-                //console.log(this.$route.params.pageType)
-                return this.$route.params.pageType;
+                //console.log(this.$route.query.pageType)
+                return this.$route.query.pageType;
             }
         },
         data(){
@@ -76,7 +76,7 @@
             // 切换页面
             '$route' (to, from) {
                 // 如果是当前页面切换分类的情况
-                if (to.params.pageType) {
+                if (to.query.pageType) {
                     this.count=0;
                     this.error=false;
                     this.moives=[];
@@ -115,6 +115,7 @@
             box-sizing:border-box;
             padding:5px;
             float:left;
+
             a{
                 display:block;
                 color:#fff;

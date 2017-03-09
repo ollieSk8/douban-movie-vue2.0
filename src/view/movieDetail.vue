@@ -23,6 +23,7 @@
                 </div>
             </section>
         </div>
+        <div class="loading fa fa-spinner fa-2x fa-spin" v-show="loading"></div>
     </div>
 </template>
 <script>
@@ -31,7 +32,8 @@
     export default {
         data(){
             return {
-                movie:{}
+                movie:{},
+                loading:true
             }
         },
         components:{
@@ -58,6 +60,7 @@
                 .then((response) => {
                     console.log('111')
                     this.movie=response.data
+                    this.loading=false;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -139,4 +142,15 @@
         }
     }
     }
+    .loading{
+            width:100%;
+            height:30px;
+            text-align:center;
+            color:#42b983;
+            line-height:30px;
+            margin-bottom:20px;
+            position:fixed;
+            top:50%;
+            z-index:10;
+        }
 </style>
