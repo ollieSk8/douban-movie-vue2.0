@@ -4,7 +4,7 @@
 <script>
     export default {
         mounted(){
-            this.$router.push({ name: 'list', params: { pageType: 'in_theaters',textType:'正在热映'}})
+            this.$router.push({  name: 'list', params:{pageType: 'in_theaters'},query: { pageType: 'in_theaters',textType:'正在热映'}})
         }
     }
 </script>

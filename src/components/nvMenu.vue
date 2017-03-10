@@ -3,12 +3,12 @@
        <div class="nv-bg" v-if="showFlag" v-on:click="emitHead"></div>
        <div class="nv-menu" v-bind:class="{'menu-show':showFlag}">
             <ul>
-                <li v-on:click="emitHead"><router-link :to="{ name: 'list', query: { pageType: 'in_theaters',textType:'正在热映'}}"><span class="fa fa-star"></span> 正在热映</router-link></li>
-                <li v-on:click="emitHead"><router-link :to="{ name: 'list', query: { pageType: 'coming_soon',textType:'即将上映'}}"><span class="fa fa-play-circle"></span>即将上映</router-link></li>
-                <li v-on:click="emitHead"><router-link :to="{ name: 'list', query: { pageType: 'top250',textType:'Top250'}}"><span class="fa fa-bar-chart"></span>Top250</router-link></li>
-                <li v-on:click="emitHead"><router-link :to="{ name: 'list', query: { pageType: 'weekly',textType:'口碑榜'}}"><span class="fa fa-bullhorn"></span>口碑榜</router-link></li>
-                <li v-on:click="emitHead"><router-link :to="{ name: 'list', query: { pageType: 'us_box',textType:'北美票房榜'}}"><span class="fa fa-bookmark"></span>北美票房榜</router-link></li>
-                <li v-on:click="emitHead"><router-link :to="{ name: 'list', query: { pageType: 'new_movies',textType:'新片榜'}}"><span class="fa fa-certificate"></span>新片榜</router-link></li>
+                <li v-on:click="emitHead"><router-link :to="{ name: 'list', params:{pageType: 'in_theaters'},query: { pageType: 'in_theaters',textType:'正在热映'}}"><span class="fa fa-star"></span> 正在热映</router-link></li>
+                <li v-on:click="emitHead"><router-link :to="{ name: 'list', params:{pageType: 'coming_soon'},query: { pageType: 'coming_soon',textType:'即将上映'}}"><span class="fa fa-play-circle"></span>即将上映</router-link></li>
+                <li v-on:click="emitHead"><router-link :to="{ name: 'list', params:{pageType: 'top250'},query: { pageType: 'top250',textType:'Top250'}}"><span class="fa fa-bar-chart"></span>Top250</router-link></li>
+                <li v-on:click="emitHead"><router-link :to="{ name: 'list', params:{pageType: 'weekly'},query: { pageType: 'weekly',textType:'口碑榜'}}"><span class="fa fa-bullhorn"></span>口碑榜</router-link></li>
+                <li v-on:click="emitHead"><router-link :to="{ name: 'list', params:{pageType: 'us_box'},query: { pageType: 'us_box',textType:'北美票房榜'}}"><span class="fa fa-bookmark"></span>北美票房榜</router-link></li>
+                <li v-on:click="emitHead"><router-link :to="{ name: 'list', params:{pageType: 'new_movies'},query: { pageType: 'new_movies',textType:'新片榜'}}"><span class="fa fa-certificate"></span>新片榜</router-link></li>
             </ul>
        </div>
    </div>

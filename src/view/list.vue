@@ -4,7 +4,7 @@
         <div class="movie-list" v-infinite-scroll="fetchData" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
             <ul>
                 <li v-for="moive in moives">
-                    <router-link :to="{ name: 'moviedetail', query: { id : moive.id,textType:moive.title}}">
+                    <router-link :to="{ name: 'moviedetail', params:{id : moive.id},query: { id : moive.id,textType:moive.title}}">
                         <div class="cover"><img v-bind:src="moive.images.medium" alt=""></div>
                         <div class="info"><h3>{{moive.title}}</h3></div>
                     </router-link>
@@ -21,8 +21,6 @@
 <script>
     import Vue from 'vue';
     import nvHead from '../components/nvHead.vue';
-    import vueResource from 'vue-resource'
-    Vue.use(vueResource);
     import infiniteScroll from 'vue-infinite-scroll'
     Vue.use(infiniteScroll)
     export default {

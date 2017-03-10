@@ -1,8 +1,11 @@
 <template>
   <div>
-    <div class="header" v-bind:class="{' pull-right':showFlag}">
-      <div class="toolbar-nav" v-on:click="toggleMenu">
+    <div class="header" v-bind:class="{' pull-right':showFlag}" >
+      <div class="toolbar-nav" v-on:click="toggleMenu" v-if="!backBtnShow">
         <div class="icon fa fa-align-justify"></div>
+      </div>
+      <div class="toolbar-nav" v-on:click="goback" v-if="backBtnShow">
+        <div class="icon fa fa-chevron-left"></div>
       </div>
       <div class="toolbar-text">{{textType}}</div>
       <div class="zhanwei"></div>
@@ -22,13 +25,16 @@
       components:{
           'nv-menu':nvMenu
       },
-      props:['textType'],
+      props:['textType','backBtnShow'],
       methods:{
           toggleMenu(){
             this.showFlag=true;
           },
           showFlagFalse(){
               this.showFlag=false;
+          },
+          goback(){
+              this.$router.go(-1);
           }
       }
   }

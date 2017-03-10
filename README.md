@@ -1,6 +1,6 @@
-# douban-movie
+## Description
 
-> A Vue.js project
+> douban-movie-vue2.0 build with vue2.0 vue-resource vue-router 
 
 ## Build Setup
 
@@ -11,21 +11,20 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
-npm run build
-
 ```
 
-最后打开浏览器，输入`localhost:8880`即可访问。效果图如下：
+open the browser the enter `localhost:8880`
 
 ![text](./static/doubanmovie.gif)
+
+## server api
+
+https://developers.douban.com/wiki/?title=movie_v2
+
 ## third part
 
-> axios 请求
+> font-awesome 
 
-> font-awesome 图标
-
-> ress 重置样式
-
-> vue-infinite-scroll 下拉加载
-
+> ress
+ 
+> vue-infinite-scroll

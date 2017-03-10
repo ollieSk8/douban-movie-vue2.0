@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <nv-head :text-type="textType"></nv-head>
+        <nv-head :text-type="textType" :back-btn-show="true"></nv-head>
         <div class="detail-card" v-if="movie.title">
             <div>
                 <img :src="movie.images.large" style="width:100%">
@@ -28,7 +28,6 @@
 </template>
 <script>
     import nvHead from '../components/nvHead.vue';
-    import axios from 'axios';
     export default {
         data(){
             return {
@@ -56,15 +55,12 @@
             }
         },
         created(){
-            console.log(this.$route.query.id)
-            axios.get('/api/movie/subject/'+this.$route.query.id)
+            this.$http.get('/api/movie/subject/'+this.$route.query.id)
                 .then((response) => {
-                    console.log('111')
                     this.movie=response.data
                     this.loading=false;
-                })
-                .catch(function (error) {
-                    console.log(error);
+                }, response => {
+                    console.log('error');
                 });
         }
     }
