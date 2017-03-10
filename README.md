@@ -13,7 +13,7 @@ npm run dev
 
 ```
 
-open the browser the enter `localhost:8880`
+open the browser and then enter `localhost:8880`
 
 ![text](./static/doubanmovie.gif)
 
