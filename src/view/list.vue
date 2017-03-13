@@ -7,6 +7,7 @@
                     <router-link :to="{ name: 'moviedetail', params:{id : moive.id},query: { id : moive.id,textType:moive.title}}">
                         <div class="cover"><img v-bind:src="moive.images.medium" alt=""></div>
                         <div class="info"><h3>{{moive.title}}</h3></div>
+                        <star :score="moive.rating.average"></star>
                     </router-link>
                 </li>
             </ul>
@@ -21,13 +22,15 @@
 <script>
     import Vue from 'vue';
     import nvHead from '../components/nvHead.vue';
+    import star from  '../components/star.vue';
     import infiniteScroll from 'vue-infinite-scroll'
     import store from '../util'
     Vue.use(infiniteScroll)
     export default {
         name: 'list',
         components:{
-            'nv-head':nvHead
+            'nv-head':nvHead,
+            'star':star
         },
         computed:{
             textType(){
@@ -52,7 +55,6 @@
         directives: {infiniteScroll},
         methods:{
             fetchData(){
-
                 this.busy = true;
                 this.loading=true;
                 let key=this.pageType+''+this.count;
@@ -68,7 +70,8 @@
                                 this.busy = false;
                                 this.loading=false;
                                 this.moives=this.moives.concat(response.data.subjects);
-                                store.set(key,response.data.subjects,10000*10);
+                                store.set(key,response.data.subjects,10000*100);
+                                this.total=response.data.total;
                                 this.count+=10;
                             }else{
                                 this.loading=false;
@@ -97,7 +100,7 @@
         }
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .container{width:100%;overflow:hidden;}
     .movie-list{
         width:100%;
@@ -167,8 +170,11 @@
             display:block;
             font-size:14px;
             font-weight: normal;
-            height:45px;
-            line-height:24px;
+            height:30px;
+            line-height:30px;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
         }
     }
 </style>

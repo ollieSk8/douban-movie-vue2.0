@@ -2,14 +2,24 @@
  * Created by XD on 2017/3/13.
  */
 export default {
-    time: 0,
     set(key,val,exp){
-        this.time=new Date().getTime()+exp;
-        localStorage.setItem(key,JSON.stringify(val));
+        console.log('set')
+        let times = new Date().getTime()+exp;
+        let data = {
+            data:val,
+            time:times
+        }
+        localStorage.setItem(key,JSON.stringify(data));
     },
     get(key){
-        if(new Date().getTime()<this.time){
-            return JSON.parse(localStorage.getItem(key));
+        let dataString = JSON.parse(localStorage.getItem(key));
+        if(dataString){
+            let dataTime = dataString.time;
+            if (dataTime > new Date().getTime()) {
+                console.log('get')
+                return dataString.data;
+            }
         }
+
     }
 };
