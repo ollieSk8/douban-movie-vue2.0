@@ -3,7 +3,7 @@
         <nv-head :text-type="textType"></nv-head>
         <div class="movie-list" v-infinite-scroll="fetchData" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
             <ul>
-                <li v-for="moive in moives">
+                <li v-for="moive in movies">
                     <router-link :to="{ name: 'moviedetail', params:{id : moive.id},query: { id : moive.id,textType:moive.title}}">
                         <div class="cover"><img v-bind:src="moive.images.medium" alt=""></div>
                         <div class="info"><h3>{{moive.title}}</h3></div>
@@ -34,17 +34,17 @@
         },
         computed:{
             textType(){
-                //console.log(this.$route.query.textType
                 return this.$route.query.textType;
             },
             pageType(){
-                //console.log(this.$route.query.pageType)
                 return this.$route.query.pageType;
+            },
+            movies () {
+                return this.$store.getters.getMovies;
             }
         },
         data(){
             return {
-                moives:[],
                 busy: false,
                 text:'正在加载',
                 count:0,
@@ -61,7 +61,8 @@
                 if(store.get(key)){
                     this.busy = false;
                     this.loading=false;
-                    this.moives=this.moives.concat(store.get(key));
+                    let data=store.get(key);
+                    this.$store.dispatch('mergeData',data);
                     this.count+=10;
                 }else{
                     this.$http.get('/api/movie/'+this.pageType+'?start='+this.count+'&count=10')
@@ -69,8 +70,9 @@
                             if(response.data.subjects.length!=0){
                                 this.busy = false;
                                 this.loading=false;
-                                this.moives=this.moives.concat(response.data.subjects);
-                                store.set(key,response.data.subjects,10000*100);
+                                let data = response.data.subjects;
+                                this.$store.dispatch('mergeData',data);
+                                store.set(key,data,10000*100);
                                 this.total=response.data.total;
                                 this.count+=10;
                             }else{
@@ -92,7 +94,7 @@
                 if (to.query.pageType) {
                     this.count=0;
                     this.error=false;
-                    this.moives=[];
+                    this.$store.dispatch('clearMovies');
                     window.scrollTo(0,0);
                     this.fetchData();
                 }

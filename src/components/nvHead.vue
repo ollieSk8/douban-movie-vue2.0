@@ -8,7 +8,6 @@
         <div class="icon fa fa-chevron-left"></div>
       </div>
       <div class="toolbar-text">{{textType}}</div>
-      <div class="zhanwei"></div>
     </div>
     <nv-menu :showFlag="showFlag" v-on:showFlagFalse="showFlagFalse"></nv-menu>
   </div>

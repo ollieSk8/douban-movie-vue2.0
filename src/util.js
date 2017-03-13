@@ -3,7 +3,6 @@
  */
 export default {
     set(key,val,exp){
-        console.log('set')
         let times = new Date().getTime()+exp;
         let data = {
             data:val,
@@ -16,7 +15,6 @@ export default {
         if(dataString){
             let dataTime = dataString.time;
             if (dataTime > new Date().getTime()) {
-                console.log('get')
                 return dataString.data;
             }
         }

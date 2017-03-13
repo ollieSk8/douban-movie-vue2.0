@@ -31,7 +31,6 @@
     export default {
         data(){
             return {
-                movie:{},
                 loading:true
             }
         },
@@ -39,11 +38,11 @@
             'nv-head':nvHead
         },
         computed:{
+            movie(){
+                return this.$store.getters.movie;
+            },
             getMeta(){
-                var cast = this.movie.casts.reduce((name,value)=>{
-                    return name ? name +' / '+ value.name : value.name;
-                }, '');
-                return this.movie.countries.join(' / ') + ' / '+this.movie.genres.join(' / ') + ' / '+this.movie.directors[0].name +'(导演) / ' + cast;
+               return this.$store.getters.getMeta;
             },
             textType(){
                 //console.log(this.$route.query.textType)
@@ -55,9 +54,10 @@
             }
         },
         created(){
+            this.$store.dispatch('clearDeatil');
             this.$http.get('/api/movie/subject/'+this.$route.query.id)
                 .then((response) => {
-                    this.movie=response.data
+                    this.$store.dispatch('mergeDeatil',response.data);
                     this.loading=false;
                 }, response => {
                     console.log('error');
