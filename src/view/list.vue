@@ -22,6 +22,7 @@
     import Vue from 'vue';
     import nvHead from '../components/nvHead.vue';
     import infiniteScroll from 'vue-infinite-scroll'
+    import store from '../util'
     Vue.use(infiniteScroll)
     export default {
         name: 'list',
@@ -51,23 +52,34 @@
         directives: {infiniteScroll},
         methods:{
             fetchData(){
+
                 this.busy = true;
                 this.loading=true;
-                this.$http.get('/api/movie/'+this.pageType+'?start='+this.count+'&count=10')
-                    .then((response) => {
-                        if(response.data.subjects.length!=0){
-                            this.busy = false;
+                let key=this.pageType+''+this.count;
+                if(store.get(key)){
+                    this.busy = false;
+                    this.loading=false;
+                    this.moives=this.moives.concat(store.get(key));
+                    this.count+=10;
+                }else{
+                    this.$http.get('/api/movie/'+this.pageType+'?start='+this.count+'&count=10')
+                        .then((response) => {
+                            if(response.data.subjects.length!=0){
+                                this.busy = false;
+                                this.loading=false;
+                                this.moives=this.moives.concat(response.data.subjects);
+                                store.set(key,response.data.subjects,10000*10);
+                                this.count+=10;
+                            }else{
+                                this.loading=false;
+                            }
+                        }, response => {
                             this.loading=false;
-                            this.moives=this.moives.concat(response.data.subjects);
-                            this.count+=10;
-                        }else{
-                            this.loading=false;
-                        }
-                    }, response => {
-                        this.loading=false;
-                        this.error=true;
-                        console.log('error');
-                    })
+                            this.error=true;
+                            console.log('error');
+                        })
+                }
+
             }
         },
         watch: {
@@ -78,6 +90,7 @@
                     this.count=0;
                     this.error=false;
                     this.moives=[];
+                    window.scrollTo(0,0);
                     this.fetchData();
                 }
             }
