@@ -1,6 +1,6 @@
 ## Description
 
-> douban-movie-vue2.0 build with vue2.0 vue-resource vue-router 
+> douban-movie-vue2.0 build with vue2.0 vue-resource vue-router vuex
 
 ## Build Setup
 
@@ -28,3 +28,4 @@ https://developers.douban.com/wiki/?title=movie_v2
 > ress
  
 > vue-infinite-scroll
+
